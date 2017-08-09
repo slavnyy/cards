@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>002.city</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/static/valid.js"></script>
+<style>
+html,
+body,
+.view {
+    height: 100%;
+}
+	.view {
+    background: url("/static/69347371.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+header {
+    height: 55px;
+    background-color: #2f2f2f;
+    line-height: 55px;
+    position: fixed;
+    width: 100%;
+}
+header ul li a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #acacac;
+    font-size: 16px;
+    font-family: 'Futura W01 Medium','Futura','Helvetica', sans-serif;
+    height: 52px;
+    line-height: 52px;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
+    color: #a94442;
+}
+</style>
+<link rel="stylesheet" href="/static/main.css">
+<body>
+<div class="view">
+<header>
+	<ul>
+		<p class="center">
+            <!-- 
+			<a href="/">Вступить в клуб</a> 
+            <a class="text-bold text-white" href="/login">Войти</a> -->
+			<a href="/"><button type="submit" class="btn btn-default">На главную</button></a>
+			{% if not current_user.is_authenticated %}
+			<a href="/login"><button type="submit" class="btn btn-default">Войти</button></a>
+			{% endif %}
+            {% if current_user.is_authenticated %}
+            <a href="/logout"><button type="submit" class="btn btn-default">Выход</button></a>
+            {% endif %}
+		</p>
+	</ul>
+</header>
+<br><br><br>
+<div class="container">
+<div class="about-info transbox">
+<p><h1>Дорогой Друг!</h1></p>
+
+<p><h3>Я приветствую тебя в нашем Городе!</h3><p>
+
+<p>
+Данный проект рассчитан на сближение людей, оказания взаимной помощи и не только. Всегда объединённый в одном направлении людской ресурс позволял и позволяет добиться больших результатов.
+</p>
+<p>
+Старая пословица гласит: «Один в поле не воин» и это в определённом смысле правда. Мы не стремимся за большим количеством членов Города, хотя чего скрывать, это было бы приятно, мы стремимся за качеством наших Друзей.
+</p>
+<p>
+У каждого из нас своя профессия, каждый в этой жизни добился определённых результатов или только начинает стремиться вверх по жизненной лестнице. В жизненном круговороте мы должны помогать друг другу, в любой ситуации надо сплочённо и уверенно быть среди своих близких, друзей, своего круга людей.
+</p>
+<p>
+Давайте жить веселее, увереннее, давайте творить добро. Любое доброе и полезное дело приносит улыбки и радость людям. Чем больше нас, тем больше у нас возможностей, тем шире территория наших умений.
+</p>
+<p>
+Когда-то мне сказали, что внешние и внутренние ресурсы должны крутиться среди своих. Это бесспорный и доказанный факт. Каждый Друг нашего Города, как и любой другой человек, каждый день сталкивается с правом выбора куда, когда и на что потратить свои честно нажитые, и намного приятнее, и удобнее тратить их с умом, тратить так, чтобы и самому покупка или вложение было приятно, и чтобы получающая сторона радовалась пополнению.
+</p>
+<p>
+Хочу сразу предупредить всех, к Вам пойдут не просто люди, к Вам пойдут наши общие Друзья. Вам будут звонить, приезжать, Вы будете встречаться или помогать друг другу дистанционно, Вы будете полезны друг другу, каждый в своём направлении.
+</p>
+<p>
+Вы обладаете кредитом доверия, потому что являетесь моими Друзьями, Друзьями моих Друзей, за Вас попросили, Вас рекомендовали, за Вас ходатайствуют, Вы проявили себя, Вы полноценный член Города, который в первую очередь готов дать, нежели взять.
+</p>
+
+<p>
+<h5>С Уважением,</h5>
+<h5>Drug №1</h5>
+</p>
+
+<p><h6>Один для всех и все для одного!</h6>
+</p>
+
+<p style="font-weight: bold;">
+p.s. Рассмотрение заявок до 30 суток.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

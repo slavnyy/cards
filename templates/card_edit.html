@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>002.city</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/static/valid.js"></script>
+<style>
+html,
+body,
+.view {
+    height: 100%;
+    background-color: #FAFAFA;
+}
+	.view {
+	background-color: #FAFAFA;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+header {
+    height: 55px;
+    background-color: #2f2f2f;
+    line-height: 55px;
+    position: fixed;
+    width: 100%;
+}
+header ul li a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #acacac;
+    font-size: 16px;
+    font-family: 'Futura W01 Medium','Futura','Helvetica', sans-serif;
+    height: 52px;
+    line-height: 52px;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
+    color: #a94442;
+}
+.green-button {
+    background-color: #28a745;
+}
+</style>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <div class="navbar-header">
+              <a class="navbar-brand topnav" href="{{ url_for('start_page') }}">002.city</a>
+              <a class="navbar-brand topnav" href="{{url_for('profile_show',id=current_user.id)}}">К профилю</a>
+          </div>
+        </div>
+    </nav>
+<div class="view">
+<div id="entryModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+				<form action="{{url_for('card_edit',card_id=id)}}" method="post">
+					{{result.hidden_tag()}}
+					{% for item in result %}
+						{% if item.id not in ['discount_percent','is_displayed','user_id','csrf_token'] %}
+						<div class="form-group">
+                        {{item.label(class_="col-xs-3 control-label")}}
+                        <div class="col-xs-5">
+                        	{{item(class_="form-control")}}
+                        </div>
+                    </div>
+						{% else %}
+						{{item(type="hidden")}}
+						{% endif %}
+					{% endfor %}
+				<button type="submit" class="btn btn-primary green-button">Сохранить изменения</button>
+				</form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+</body>
+</html>

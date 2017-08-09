@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="{{url_for('edit_result',id=id)}}" method="post">
+	{{result.hidden_tag()}}
+	{% for item in result %}
+		{{item.label}} {{item}}
+	{% endfor %}
+	<button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>002.city</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/static/valid.js"></script>
+<style>
+html,
+body,
+.view {
+    height: 100%;
+}
+	.view {
+    background: url("/static/69347371.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+header {
+    height: 55px;
+    background-color: #2f2f2f;
+    line-height: 55px;
+    position: fixed;
+    width: 100%;
+}
+header ul li a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #acacac;
+    font-size: 16px;
+    font-family: 'Futura W01 Medium','Futura','Helvetica', sans-serif;
+    height: 52px;
+    line-height: 52px;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
+    color: #a94442;
+}
+</style>
+<body>
+<div class="view">
+<header>
+	<ul>
+		<p class="center">
+            <!-- 
+			<a href="/">Вступить в клуб</a> 
+            <a class="text-bold text-white" href="/login">Войти</a> -->
+            {% if not current_user.is_authenticated %}
+			<a href="/login"><button type="submit" class="btn btn-default">Войти</button></a>
+            <a href="/register"><button type="submit" class="btn btn-default">Зарегистрироваться</button></a>
+            {% endif %}
+            <a href="/about"><button type="submit" class="btn btn-default">О Городе</button></a>
+            <a href="/cards"><button type="submit" class="btn btn-default">Уже с нами!</button></a>
+            {% if current_user.is_authenticated %}
+            <a href="/logout"><button type="submit" class="btn btn-default">Выход</button></a>
+            <a style="color: #6AEA23;float: right;margin-right: 2em;" href="{{url_for('profile_show',id=current_user.id)}}">Добро пожаловать, {{current_user.email}}!</a>
+            {% endif %}
+		</p>
+	</ul>
+</header>
+
+<!-- 
+<p class="text-center">
+    <button class="btn btn-default" data-toggle="modal" data-target="#loginModal"></button>
+</p>
+ -->
+<div class="modal fade" id="entryModal" tabindex="-1" role="dialog" aria-labelledby="Entry" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Вход</h5>
+            </div>
+            <div class="modal-body">
+                <form id="login" class="form-horizontal" action="{{url_for('security.login')}}" method="post">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Логин</label>
+                        <div class="col-xs-5">
+                            <input id="email" class="form-control" type="text" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Пароль</label>
+                        <div class="col-xs-5">
+                            <input id="password" class="form-control" type="password" name="password">                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                    </div>
+                </form>             
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Присоединиться</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="loginForm" action="/forsubmit" method="post" class="form-horizontal">
+                    {{form.hidden_tag()}}
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Имя</label>
+                        <div class="col-xs-5">
+                            {{form.first_name(class_="form-control")}}                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">e-mail</label>
+                        <div class="col-xs-5">
+                            {{form.personal_email(class_="form-control",type="email",pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}")}}                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Должность</label>
+                        <div class="col-xs-5">
+                            {{form.position(class_="form-control")}}                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Вид деятельности</label>
+                        <div class="col-xs-5">
+                            {{form.organization_activity(class_="form-control")}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Отправить</button><!-- 
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+	<!-- <div style="text-align: center"><img src="static/S9QyGVFO.jpeg" style="width: 50%; height: 50%"/></div> -->
+</body>
+
+<script>
+$(document).ready(function() {
+    $('#loginForm').formValidation({
+        framework: 'bootstrap',
+        excluded: ':disabled',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            last_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите фамилию'
+                    }
+                }
+            },
+            first_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите имя'
+                    }
+                }
+            },
+            personal_email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите почту'
+                    },
+                    emailAddress: {
+                        message: 'Укажите почту в правильном формате'
+                    },
+                    regexp: {
+                        message: ' myemail@domain.com'
+                    }
+                }
+            },
+            position: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите должность в организации'
+                    }
+                }
+            },
+            organization_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите название организации'
+                    }
+                }
+            },
+            organization_url: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите сайт организации'
+                    }
+                }
+            },
+            organization_activity: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите вид деятельности организации'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+
+</html>
