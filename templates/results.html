@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title></title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/main.css">
+<link rel="stylesheet" href="/static/cardinfo.css">
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <div class="navbar-header">
+              <a class="navbar-brand topnav" href="{{ url_for('start_page') }}">002.city</a>
+          </div>
+        </div>
+    </nav>
+<main>
+<div class="container bg-faded">
+	<div class="row">
+		{% for card in results %}
+		<div class="card bordered">
+			<div class="card-block">
+				<h4 class="card-title">{{card.first_name}} {{card.discount_percent}}</h4>
+				{% if current_user.is_authenticated %}
+				<p class="card-text text-center"><a href="{{card.organization_url}}">{{card.organization_name}}</a></p>
+				{% else %}
+				<p class="card-text text-center blured">Информация скрыта!</p>
+				{% endif %}
+				<p>{{card.position}}</p>
+				<button type="button" class="btn btn-primary">{{card.organization_activity}}</button>
+				
+			</div>
+		</div>
+
+		{% endfor %}
+	</div>
+</div>
+</main>
+</body>
+</html>
+
+
+
