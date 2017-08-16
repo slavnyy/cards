@@ -59,7 +59,7 @@ header ul li a {
         <div class="container topnav">
           <div class="navbar-header">
               <a class="navbar-brand topnav" href="{{ url_for('start_page') }}">002.city</a>
-              <a class="navbar-brand topnav" href="{{url_for('profile_show',id=current_user.id)}}">К профилю</a>
+              <a style="color: #6AEA23;float: right;margin-right: 2em;" href="{{url_for('profile_show',id=current_user.id)}}"><i class="fa fa-user-circle"></i> {{current_user.email}}!</a>
           </div>
         </div>
     </nav>
@@ -71,9 +71,21 @@ header ul li a {
 			<form id="loginForm" action="{{url_for('card_create')}}" method="post" class="form-horizontal">
                     {{form.hidden_tag()}}
                     <div class="form-group">
+                        <label class="col-xs-3 control-label">Фамилия</label>
+                        <div class="col-xs-5">
+                            {{form.last_name(class_="form-control")}}                   
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-xs-3 control-label">Имя</label>
                         <div class="col-xs-5">
                             {{form.first_name(class_="form-control")}}                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Отчество</label>
+                        <div class="col-xs-5">
+                            {{form.middle_name(class_="form-control")}}                   
                         </div>
                     </div>
                     <div class="form-group">
@@ -107,9 +119,39 @@ header ul li a {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-3 control-label">Процент скидки</label>
+                        <label class="col-xs-3 control-label">Процент скидки %</label>
                         <div class="col-xs-5">
                             {{form.discount_percent(class_="form-control")}}                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Адрес деятельности</label>
+                        <div class="col-xs-5">
+                            {{form.address_activity(class_="form-control")}}                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Юридический адрес</label>
+                        <div class="col-xs-5">
+                            {{form.address_official(class_="form-control")}}                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Телефон рабочий</label>
+                        <div class="col-xs-5">
+                            {{form.phone_work(class_="form-control")}}                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Телефон мобильный</label>
+                        <div class="col-xs-5">
+                            {{form.phone_mobile(class_="form-control")}}                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Телефон организации</label>
+                        <div class="col-xs-5">
+                            {{form.phone_organization(class_="form-control")}}                           
                         </div>
                     </div>
 
@@ -127,6 +169,7 @@ header ul li a {
 </div>
 
 </div>
+<script src="https://use.fontawesome.com/424b6e36ae.js"></script>
 </body>
 
 <script>
@@ -178,6 +221,16 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Укажите название организации'
+                    }
+                }
+            },
+            discount_percent: {
+                validators: {
+                    notEmpty: {
+                        message: 'Укажите % скидки'
+                    },
+                    integer: {
+                        message: 'Укажите целое число, без знака %'
                     }
                 }
             },

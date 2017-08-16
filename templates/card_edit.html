@@ -60,7 +60,7 @@ header ul li a {
         <div class="container topnav">
           <div class="navbar-header">
               <a class="navbar-brand topnav" href="{{ url_for('start_page') }}">002.city</a>
-              <a class="navbar-brand topnav" href="{{url_for('profile_show',id=current_user.id)}}">К профилю</a>
+              <a style="color: #6AEA23;float: right;margin-right: 2em;" href="{{url_for('profile_show',id=current_user.id)}}"><i class="fa fa-user-circle"></i> {{current_user.email}}!</a>
           </div>
         </div>
     </nav>
@@ -69,10 +69,10 @@ header ul li a {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-				<form action="{{url_for('card_edit',card_id=id)}}" method="post">
+				<form id="editForm"  action="{{url_for('card_edit',card_id=id)}}" method="post">
 					{{result.hidden_tag()}}
 					{% for item in result %}
-						{% if item.id not in ['discount_percent','is_displayed','user_id','csrf_token'] %}
+						{% if item.id not in ['discount_percent','is_displayed','user_id','csrf_token','id'] %}
 						<div class="form-group">
                         {{item.label(class_="col-xs-3 control-label")}}
                         <div class="col-xs-5">
@@ -91,5 +91,6 @@ header ul li a {
     </div>
 </div>
 </div>
+<script src="https://use.fontawesome.com/424b6e36ae.js"></script>
 </body>
 </html>

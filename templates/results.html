@@ -9,13 +9,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/main.css">
+<!-- <link rel="stylesheet" href="/static/main.css">
 <link rel="stylesheet" href="/static/cardinfo.css">
+ --><link rel="stylesheet" href="/static/keStyle.css">
+<link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
 <body>
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
           <div class="navbar-header">
               <a class="navbar-brand topnav" href="{{ url_for('start_page') }}">002.city</a>
+              {% if current_user.is_authenticated %}
+              <a style="color: #6AEA23;float: right;margin-right: 2em;" href="{{url_for('profile_show',id=current_user.id)}}"><i class="fa fa-user-circle"></i> {{current_user.email}}!</a>
+              {% endif %}
           </div>
         </div>
     </nav>
@@ -23,24 +28,37 @@
 <div class="container bg-faded">
 	<div class="row">
 		{% for card in results %}
-		<div class="card bordered">
-			<div class="card-block">
-				<h4 class="card-title">{{card.first_name}} {{card.discount_percent}}</h4>
-				{% if current_user.is_authenticated %}
-				<p class="card-text text-center"><a href="{{card.organization_url}}">{{card.organization_name}}</a></p>
-				{% else %}
-				<p class="card-text text-center blured">Информация скрыта!</p>
-				{% endif %}
-				<p>{{card.position}}</p>
-				<button type="button" class="btn btn-primary">{{card.organization_activity}}</button>
-				
-			</div>
-		</div>
 
+	    <div class="card" style="">	
+		  <div class="card-title text-right" style=""> 
+		    <!--img src="C:\Users\discord\Downloads\bayreuther-hell.jpg" class="rounded-circle img-thumbnail float-left" alt="..."/-->
+		    
+			<p><span>{{card.organization_name}} </span>{{card.discount_percent}}{% if '%' not in card.discount_percent %}%{%endif%}</p>
+		   
+		  </div>
+		  <div class="card-text text-center">
+		    <p><span style="vertical-align: middle">{% if card.last_name%}
+		    {{card.last_name}}
+		    {% endif %} 
+		    {% if card.first_name%}{{card.first_name}}
+		    {% endif %} 
+		    {% if card.middle_name %}{{card.middle_name}}
+		    {% endif %}</span></p>
+			<span style="vertical-align: middle">{{card.position}}</span>
+          </div>		
+          <div class="card-footer">
+		    <div class="float-left">
+			  <p>{{card.organization_activity}}</p>
+			</div>
+		   <a href="{{url_for('show_full_card_info',card_id=card.id)}}"><i class="fa fa-info-circle float-right" aria-hidden="true"></i></a>
+          </div>		   
+		  
+		</div>
 		{% endfor %}
 	</div>
 </div>
 </main>
+<script src="https://use.fontawesome.com/424b6e36ae.js"></script>
 </body>
 </html>
 

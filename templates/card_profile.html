@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title></title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Geolink" type="text/javascript"></script>
+<!-- <link rel="stylesheet" href="/static/main.css">-->
+<link rel="stylesheet" href="/static/cardinfo.css">
+<!-- <link rel="stylesheet" href="/static/keStyle.css">
+ --><link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <div class="navbar-header">
+              <a class="navbar-brand topnav" href="{{ url_for('list_result') }}">Вернуться к просмотру</a>
+              <a style="color: #6AEA23;float: right;margin-right: 2em;" href="{{url_for('profile_show',id=current_user.id)}}"><i class="fa fa-user-circle"></i> {{current_user.email}}!</a>
+          </div>
+        </div>
+    </nav>
+<main>
+<div class="container bg-faded">
+	<div class="row">
+
+		<div class="card" style="">	
+		  <div class="card-title text-right" style=""> 
+		    <!--img src="C:\Users\discord\Downloads\bayreuther-hell.jpg" class="rounded-circle img-thumbnail float-left" alt="..."/-->
+		    
+			<p><span>{{card.organization_name.data}} </span>{{card.discount_percent.data}}{% if '%' not in card.discount_percent.data %}%{%endif%}</p>
+		   
+		  </div>
+		  <div class="card-text text-center">
+		    <p><span style="vertical-align: middle">{% if card.last_name.data%}
+		    {{card.last_name.data}}
+		    {% endif %} 
+		    {% if card.first_name.data%}{{card.first_name.data}}
+		    {% endif %} 
+		    {% if card.middle_name.data %}{{card.middle_name.data}}
+		    {% endif %}</span></p>
+			<span style="vertical-align: middle">{{card.position.data}}</span>
+          </div>		
+          <div class="card-footer">
+		    <div class="float-left">
+			  <p>{{card.organization_activity.data}}</p>
+			</div>
+
+          </div>		   
+		  
+		</div>
+		<div class="card" style="">	
+		  <div class="card-title text-right" style=""> 
+			<p><span>Контакты</span></p>
+		  </div>
+		  <div class="card-body card-text text-center">
+		  {% if card.personal_email.data %}
+			<span style="vertical-align: middle"><i class="fa fa-inbox"></i> {{card.personal_email.label}}: {{card.personal_email.data}}</span>
+		  {% endif %}
+		  {% if card.phone_work.data %}
+		    <p><span style="vertical-align: middle"><i class="fa fa-phone">{{card.phone_work.label}}: <a href="tel: {{card.phone_work.data}}">{{card.phone_work.data}}</a></i></span></p>
+		  {% endif %}
+		  {% if card.phone_mobile.data %}
+			<p><span style="vertical-align: middle"><i class="fa fa-mobile"></i> {{card.phone_mobile.label}}: <a href="tel: {{card.phone_mobile.data}}">{{card.phone_mobile.data}}</a></span></p>
+		  {% endif %}
+		  {% if card.phone_organization.data %}
+			<p><span style="vertical-align: middle"><i class="fa fa-phone"></i>{{card.phone_organization.label}}: <a href="tel: {{card.phone_organization}}">{{card.phone_organization.data}}</a></span></p>
+		  {% endif %}
+          </div>		   
+		  
+		</div>
+		<div class="card" style="">	
+		  <div class="card-title text-right" style=""> 
+			<p><span>Адреса</span></p>
+		  </div>
+		  <div class="card-body card-text text-center">
+		  {% if card.address_activity.data %}
+		    <p><span style="vertical-align: middle"><i class="fa fa-map-marker"></i> {{card.address_activity.label}}: <a class="ymaps-geolink">{{card.address_activity.data}}</a></span></p>
+		  {% endif %}
+		  {% if card.address_official.data %}
+			<span style="vertical-align: middle"><i class="fa fa-map-marker"></i> {{card.address_official.label}}: <a class="ymaps-geolink">{{card.address_official.data}}</a></span>
+		  {% endif %}
+          </div>		   
+		  
+		</div>
+	</div>
+</div>
+</main>
+<script src="https://use.fontawesome.com/424b6e36ae.js"></script>
+</body>
+</html>
+
+
+

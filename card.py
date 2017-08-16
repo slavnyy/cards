@@ -104,6 +104,11 @@ def card_edit(card_id):
 		return render_template("card_edit.html",result=form,id=card_id)
 	return redirect(url_for('start_page'))
 
+@card.route('/card/<int:card_id>',methods=['GET'])
+@login_required
+def show_full_card_info(card_id):
+	form = ResultForm(obj=Result.query.get_or_404(card_id))
+	return render_template("card_profile.html",card=form)
 
 @card.route('/profile/<int:id>',methods=['GET'])
 @login_required

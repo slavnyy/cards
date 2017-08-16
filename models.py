@@ -16,16 +16,21 @@ class Result(db.Model):
 	user_id = db.Column(db.Integer,ForeignKey('users.id'))
 	last_name = db.Column(db.String(100))
 	first_name = db.Column(db.String(100))
+	middle_name = db.Column(db.String(100))
 	personal_email = db.Column(db.String(255))
 	position = db.Column(db.String(200))
 	organization_name = db.Column(db.String(200))
 	organization_url = db.Column(db.String(50))
 	organization_activity = db.Column(db.String(200))
-	discount_percent = db.Column(db.String(128))
+	discount_percent = db.Column(db.Integer)
+	address_activity = db.Column(db.String(2048))
+	address_official = db.Column(db.String(2048))
+	phone_work = db.Column(db.String(256))
+	phone_mobile = db.Column(db.String(256))
+	phone_organization = db.Column(db.String(256))
 	is_displayed = db.Column(db.Boolean, unique=False, server_default='f',default=False)
 	created  = db.Column(db.DateTime,default=db.func.current_timestamp())
 	updated = db.Column(db.DateTime,default=db.func.current_timestamp(),onupdate=db.func.current_timestamp())
-
 
 	#created = db.Column(db.TIMESTAMP(timezone=False))
 	#updated = db.Column(db.TIMESTAMP(timezone=False))
@@ -59,6 +64,8 @@ class User(db.Model, UserMixin):
 	roles = relationship('Role', secondary='roles_users', 
 						backref=backref('users',lazy='dynamic'))
 	cards = relationship('Result',backref=backref('users'))
+
+
 
 class Role(db.Model, RoleMixin):
 	
