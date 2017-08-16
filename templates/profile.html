@@ -37,7 +37,7 @@
 		  <div class="card-title text-right" style=""> 
 		    <!--img src="C:\Users\discord\Downloads\bayreuther-hell.jpg" class="rounded-circle img-thumbnail float-left" alt="..."/-->
 		    
-			<a href="{{url_for('card_edit',card_id=card.id)}}" title="Редактировать визитку"><i class="fa fa-edit"></i></a><p><span> {{card.organization_name}} </span>{{card.discount_percent}}{% if '%' not in card.discount_percent %}%{%endif%}</p>
+			<a href="{{url_for('card_edit',card_id=card.id)}}" title="Редактировать визитку"><i class="fa fa-edit"></i></a><p><span> {{card.organization_name}} </span>{{card.discount_percent}}%</p>
 		   
 		  </div>
 		  <div class="card-text text-center">
