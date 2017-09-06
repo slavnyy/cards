@@ -28,23 +28,35 @@ body,
     height: 100%;
 }
 header {
-    height: 55px;
-    background-color: #2f2f2f;
-    line-height: 55px;
+    height: 80px;
+    /*background-color: hsla(225,780%,60%,0.5);*/
+    /*line-height: 55px;*/
     position: fixed;
     width: 100%;
 }
-header ul li a {
+header ul  {
+    margin: none;
+    
+}
+.btn  {
+    background-color: hsla(225,60%,40%,0.2);
     text-transform: uppercase;
     text-decoration: none;
-    color: #acacac;
-    font-size: 16px;
+    font-size: 12px;
     font-family: 'Futura W01 Medium','Futura','Helvetica', sans-serif;
-    height: 52px;
-    line-height: 52px;
+    height: 40px;
+    vertical-align: middle;
+    /*line-height: 52px;*/
     display: inline-block;
     float: right;
     margin-right: 20px;
+}
+
+.btn:hover {
+    background-color:  hsla(225, 50%,80%,0.4);
+}
+body {
+    background-color: hsla(225,40%,80%,0.4);
 }
 .has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
     color: #a94442;
